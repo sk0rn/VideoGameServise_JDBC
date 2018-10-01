@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GenreDaoImpl implements GenreDao {
 
-    //private final static Logger LOGGER = Logger.getLogger(GenreDaoImpl.class);
+    private final static Logger LOGGER = Logger.getLogger(GenreDaoImpl.class);
     private static ConnectionManager connectionManager =
             ConnectionManagerMobileDB.getInstance();
 
@@ -33,8 +33,7 @@ public class GenreDaoImpl implements GenreDao {
                 return true;
             }
         } catch (SQLException e) {
-            //LOGGER.error(e);
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return false;
     }
@@ -53,8 +52,7 @@ public class GenreDaoImpl implements GenreDao {
                 }
             }
         } catch (SQLException e) {
-            //LOGGER.error(e);
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return null;
     }
@@ -74,8 +72,7 @@ public class GenreDaoImpl implements GenreDao {
                 }
             }
         } catch (SQLException e) {
-            //LOGGER.error(e);
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return genres;
     }

@@ -1,6 +1,6 @@
 package controller;
 
-import service.GenreService;
+import service.GenreServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GenreServlet extends HttpServlet {
-    private GenreService genreService;
+    private GenreServiceImpl genreService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        genreService = new GenreService();
+        genreService = new GenreServiceImpl();
     }
 
     @Override

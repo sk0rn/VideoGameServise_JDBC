@@ -1,5 +1,6 @@
 package repository.dao.game.impl;
 
+import org.apache.log4j.Logger;
 import pojo.game.Title;
 import repository.ConnectionManager.ConnectionManager;
 import repository.ConnectionManager.ConnectionManagerMobileDB;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 
 public class TitleDaoImpl implements TitleDao {
 
+    private final static Logger LOGGER = Logger.getLogger(TitleDaoImpl.class);
     private static ConnectionManager connectionManager =
             ConnectionManagerMobileDB.getInstance();
 
@@ -31,7 +33,7 @@ public class TitleDaoImpl implements TitleDao {
                 return true;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return false;
     }
@@ -50,7 +52,7 @@ public class TitleDaoImpl implements TitleDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return null;
     }

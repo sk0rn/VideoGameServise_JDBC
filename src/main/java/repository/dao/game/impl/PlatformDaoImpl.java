@@ -1,5 +1,6 @@
 package repository.dao.game.impl;
 
+import org.apache.log4j.Logger;
 import pojo.game.Developer;
 import pojo.game.Platform;
 import repository.ConnectionManager.ConnectionManager;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 public class PlatformDaoImpl implements PlatformDao {
 
 
+    private final static Logger LOGGER = Logger.getLogger(PlatformDaoImpl.class);
     private static ConnectionManager connectionManager =
             ConnectionManagerMobileDB.getInstance();
 
@@ -34,7 +36,7 @@ public class PlatformDaoImpl implements PlatformDao {
                 return true;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return false;
     }
@@ -53,7 +55,7 @@ public class PlatformDaoImpl implements PlatformDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return null;
     }

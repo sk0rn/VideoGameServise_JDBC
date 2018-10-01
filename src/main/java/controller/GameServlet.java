@@ -1,7 +1,7 @@
 package controller;
 
 import pojo.game.Game;
-import service.GameService;
+import service.imp.GameServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,12 +11,12 @@ import java.io.IOException;
 import java.util.List;
 
 public class GameServlet extends HttpServlet {
-    private GameService gameService;
+    private GameServiceImpl gameService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        gameService = new GameService();
+        gameService = new GameServiceImpl();
     }
 
     @Override
