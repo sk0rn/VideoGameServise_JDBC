@@ -1,7 +1,7 @@
 package controller;
 
 import pojo.game.Game;
-import service.imp.GameServiceImpl;
+import service.games.impl.GameServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +20,20 @@ public class GameServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Game> games = gameService.getAllByGenre(Integer.parseInt(req.getParameter("id")));
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        List<Game> games = null;
+                switch(req.getParameter("type")){
+                    case"devs":
+                        games = gameService.getAllByDeveloper(
+                                Integer.parseInt(req.getParameter("id")));
+                        break;
+                    case"genres":
+                        games =  gameService.getAllByGenre(
+                                Integer.parseInt(req.getParameter("id")));
+                        break;
+                }
+        req.setAttribute("title", "Games");
         req.setAttribute("games", games);
         req.getRequestDispatcher("/games.jsp").forward(req, resp);
     }

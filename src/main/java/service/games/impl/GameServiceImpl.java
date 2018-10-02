@@ -1,9 +1,9 @@
-package service.imp;
+package service.games.impl;
 
 import pojo.game.Game;
 import repository.dao.game.impl.GameDaoImp;
 import repository.dao.game.interfaces.GameDao;
-import service.interfaces.GameService;
+import service.games.interfaces.GameService;
 
 import java.util.List;
 
@@ -22,6 +22,11 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<Game> getAllByGenre(Integer genreId) {
         return gameDao.getAllByGenre(genreId);
+    }
+
+    @Override
+    public List<Game> getAllByDeveloper(Integer devId) {
+        return gameDao.getAllByDeveloper(devId);
     }
 
     @Override

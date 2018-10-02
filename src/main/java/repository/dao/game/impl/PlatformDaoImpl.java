@@ -1,21 +1,19 @@
 package repository.dao.game.impl;
 
 import org.apache.log4j.Logger;
-import pojo.game.Developer;
 import pojo.game.Platform;
 import repository.ConnectionManager.ConnectionManager;
 import repository.ConnectionManager.ConnectionManagerMobileDB;
 import repository.dao.game.interfaces.PlatformDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlatformDaoImpl implements PlatformDao {
 
 
-    private final static Logger LOGGER = Logger.getLogger(PlatformDaoImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(PlatformDaoImpl.class);
     private static ConnectionManager connectionManager =
             ConnectionManagerMobileDB.getInstance();
 
@@ -58,5 +56,25 @@ public class PlatformDaoImpl implements PlatformDao {
             LOGGER.error(e);
         }
         return null;
+    }
+
+    @Override
+    public List<Platform> getAll() {
+        List<Platform> platforms = null;
+        try (Connection connection = connectionManager.getConnection();
+             Statement statement = connection.createStatement()) {
+
+            try(ResultSet resultSet = statement.executeQuery("SELECT * FROM platforms")) {
+                platforms = new ArrayList<>();
+                while (resultSet.next()) {
+                    platforms.add(new Platform(
+                            resultSet.getInt(1),
+                            resultSet.getString(2)));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return platforms;
     }
 }

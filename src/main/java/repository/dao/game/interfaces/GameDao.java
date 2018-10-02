@@ -17,4 +17,6 @@ public interface GameDao {
     List<Game> getAll();
 
     List<Game> getAllByGenre(Integer genreId);
+
+    List<Game> getAllByDeveloper(Integer devId);
 }

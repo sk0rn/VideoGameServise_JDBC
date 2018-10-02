@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GenreDaoImpl implements GenreDao {
 
-    private final static Logger LOGGER = Logger.getLogger(GenreDaoImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(GenreDaoImpl.class);
     private static ConnectionManager connectionManager =
             ConnectionManagerMobileDB.getInstance();
 

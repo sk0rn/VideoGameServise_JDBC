@@ -1,7 +1,7 @@
 package controller;
 
 import pojo.game.Game;
-import service.imp.GameServiceImpl;
+import service.games.impl.GameServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +24,7 @@ public class GameListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Game> games = gameService.getAllGames();
+        req.setAttribute("title", "All Games");
         req.setAttribute("games", games);
         req.getRequestDispatcher("/games.jsp").forward(req, resp);
     }

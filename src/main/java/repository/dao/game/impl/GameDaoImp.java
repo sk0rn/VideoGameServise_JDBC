@@ -17,16 +17,16 @@ public class GameDaoImp implements GameDao {
     private DeveloperDao devDao = new DeveloperDaoImpl();
     private PublisherDao pubDao = new PublisherDaoImpl();
     private PlatformDao platformDao = new PlatformDaoImpl();
-    private final static Logger LOGGER = Logger.getLogger(GameDaoImp.class);
+    private static final Logger LOGGER = Logger.getLogger(GameDaoImp.class);
     private static ConnectionManager connectionManager =
             ConnectionManagerMobileDB.getInstance();
 
     @Override
     public boolean add(Game game) {
-        try(Connection connection = connectionManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO games values (DEFAULT, " +
-                            "?, ?, ?, ?, ?, ?, ?, ?) RETURNING id ") ) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO games values (DEFAULT, " +
+                             "?, ?, ?, ?, ?, ?, ?, ?) RETURNING id ")) {
 
             preparedStatement.setInt(1, game.getTitle().getId());
             preparedStatement.setInt(2, game.getQuantity());
@@ -37,7 +37,7 @@ public class GameDaoImp implements GameDao {
             preparedStatement.setInt(7, game.getPlatform().getId());
             preparedStatement.setInt(8, game.getPrice());
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Integer id = resultSet.getInt(1);
                     LOGGER.info("The new object Game in DB was assigned the id: "
@@ -54,9 +54,9 @@ public class GameDaoImp implements GameDao {
 
     @Override
     public Game getById(Integer id) {
-        try(Connection connection = connectionManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM games WHERE id = ?")) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT * FROM games WHERE id = ?")) {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -80,11 +80,11 @@ public class GameDaoImp implements GameDao {
 
     @Override
     public boolean updateById(Game game) {
-        try(Connection connection = connectionManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE games SET title_id=?, quantity=?, genre_id=?," +
-                            "developer_id=?, publisher_id=?,release_year=?," +
-                            "platform_id=?, price=? WHERE id=?")) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE games SET title_id=?, quantity=?, genre_id=?," +
+                             "developer_id=?, publisher_id=?,release_year=?," +
+                             "platform_id=?, price=? WHERE id=?")) {
             preparedStatement.setInt(1, game.getTitle().getId());
             preparedStatement.setInt(2, game.getQuantity());
             preparedStatement.setInt(3, game.getGenre().getId());
@@ -104,9 +104,9 @@ public class GameDaoImp implements GameDao {
 
     @Override
     public boolean deleteById(Integer id) {
-        try(Connection connection = connectionManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM games WHERE id=?")) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM games WHERE id=?")) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             return true;
@@ -119,10 +119,10 @@ public class GameDaoImp implements GameDao {
     @Override
     public List<Game> getAll() {
         List<Game> games = null;
-        try(Connection connection = connectionManager.getConnection();
-            Statement statement = connection.createStatement()) {
+        try (Connection connection = connectionManager.getConnection();
+             Statement statement = connection.createStatement()) {
 
-            try(ResultSet resultSet = statement.executeQuery("SELECT * FROM games")) {
+            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM games")) {
                 games = new ArrayList<>();
                 while (resultSet.next()) {
                     games.add(new Game(
@@ -148,12 +148,43 @@ public class GameDaoImp implements GameDao {
     @Override
     public List<Game> getAllByGenre(Integer genreId) {
         List<Game> games = null;
-        try(Connection connection = connectionManager.getConnection();
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("SELECT * FROM games WHERE genre_id=?")) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT * FROM games WHERE genre_id=?")) {
             preparedStatement.setInt(1, genreId);
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                games = new ArrayList<>();
+                while (resultSet.next()) {
+                    games.add(new Game(
+                            resultSet.getInt(1),
+                            titleDao.getById(resultSet.getInt(2)),
+                            resultSet.getInt(3),
+                            genreDao.getById(resultSet.getInt(4)),
+                            devDao.getById(resultSet.getInt(5)),
+                            pubDao.getById(resultSet.getInt(6)),
+                            resultSet.getInt(7),
+                            platformDao.getById(resultSet.getInt(8)),
+                            resultSet.getInt(9)
+                    ));
+                }
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return games;
+    }
+
+    @Override
+    public List<Game> getAllByDeveloper(Integer genreId) {
+        List<Game> games = null;
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT * FROM games WHERE developer_id=?")) {
+            preparedStatement.setInt(1, genreId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 games = new ArrayList<>();
                 while (resultSet.next()) {
                     games.add(new Game(

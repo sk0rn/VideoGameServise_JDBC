@@ -1,5 +1,8 @@
 package repository.ConnectionManager;
 
+import org.apache.log4j.Logger;
+import repository.dao.game.impl.PublisherDaoImpl;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionManagerMobileDB implements ConnectionManager {
+    private static final Logger LOGGER = Logger.getLogger(PublisherDaoImpl.class);
     private static ConnectionManager connectionManager;
     private static final String CONFIG =
             "D:\\dev_edu\\STC13_HT\\Prjct01_VGS_JDBC\\src\\main\\resources\\conf\\settings.cfg";
@@ -29,23 +33,23 @@ public class ConnectionManagerMobileDB implements ConnectionManager {
     public Connection getConnection() {
         Connection connection = null;
 
-        String password = "";
+        String password = null;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(CONFIG))) {
             password = bufferedReader.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
 
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/vgsdb",
+                    "jdbc:postgresql://127.0.0.1:5432/vgsdb",
                     "postgres",
                     password);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return connection;
     }

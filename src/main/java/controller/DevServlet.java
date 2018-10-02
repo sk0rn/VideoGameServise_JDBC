@@ -1,6 +1,6 @@
 package controller;
 
-import service.games.impl.GenreFeatureImpl;
+import service.games.impl.DeveloperFeatureImpl;
 import service.games.interfaces.GameFeatureService;
 
 import javax.servlet.ServletException;
@@ -9,25 +9,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class GenreServlet extends HttpServlet {
-    private GameFeatureService genreService;
+public class DevServlet extends HttpServlet {
+    private GameFeatureService devService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        genreService = new GenreFeatureImpl();
+        devService = new DeveloperFeatureImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("title", "Genres");
-        req.setAttribute("genres", genreService.getAllFeatures());
-        req.getRequestDispatcher("/genres.jsp").forward(req,resp);
+        req.setAttribute("developers", devService.getAllFeatures());
+        req.setAttribute("title", "Developers");
+        req.getRequestDispatcher("/developers.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        String name = req.getParameter("name");
+        devService.addFeature(name);
+        this.doGet(req, resp);
     }
 
 }

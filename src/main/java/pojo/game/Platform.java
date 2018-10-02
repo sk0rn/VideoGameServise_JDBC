@@ -3,22 +3,22 @@ package pojo.game;
 
 public class Platform {
 
-    private int id;
+    private Integer id;
     private String name;
 
     public Platform() {
     }
 
-    public Platform(int id, String name) {
+    public Platform(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
