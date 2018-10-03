@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DeveloperFeatureImpl implements GameFeatureService {
 
-    DeveloperDao devDao;
+    private DeveloperDao devDao;
 
     public DeveloperFeatureImpl() {
         devDao = new DeveloperDaoImpl();

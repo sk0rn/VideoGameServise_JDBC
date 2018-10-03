@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PublisherFeatureImpl implements GameFeatureService {
 
-    PublisherDao pubDao;
+    private PublisherDao pubDao;
 
     public PublisherFeatureImpl() {
         pubDao = new PublisherDaoImpl();

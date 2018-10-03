@@ -2,7 +2,7 @@ package service.person;
 
 import org.apache.log4j.Logger;
 import pojo.person.Person;
-import repository.dao.person.UserDaoImpl;
+import repository.dao.person.impl.UserDaoImpl;
 import repository.dao.person.interfaces.UserDao;
 import utils.UtilMD5;
 

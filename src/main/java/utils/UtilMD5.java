@@ -1,15 +1,21 @@
 package utils;
 
+import org.apache.log4j.Logger;
+import repository.dao.game.impl.DeveloperDaoImpl;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class UtilMD5 {
+
+    private static final Logger LOGGER = Logger.getLogger(UtilMD5.class);
+
     private UtilMD5() {
     }
 
     public static String md5Custom(String st) {
-        MessageDigest messageDigest = null;
+        MessageDigest messageDigest;
         byte[] digest = new byte[0];
 
         try {
@@ -18,7 +24,7 @@ public class UtilMD5 {
             messageDigest.update(st.getBytes());
             digest = messageDigest.digest();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
 
         BigInteger bigInt = new BigInteger(1, digest);
@@ -29,11 +35,5 @@ public class UtilMD5 {
         }
 
         return md5Hex;
-    }
-
-    public static void main(String[] args) {
-
-        String pass = UtilMD5.md5Custom("asd");
-        System.out.println(pass);
     }
 }

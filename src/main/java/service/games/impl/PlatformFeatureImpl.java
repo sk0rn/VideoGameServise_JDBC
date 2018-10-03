@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PlatformFeatureImpl implements GameFeatureService {
 
-    PlatformDao platformDao;
+    private PlatformDao platformDao;
 
     public PlatformFeatureImpl() {
         platformDao = new PlatformDaoImpl();

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TitleFeatureImpl implements GameFeatureService {
 
-    TitleDao titleDao;
+    private TitleDao titleDao;
 
     public TitleFeatureImpl() {
         titleDao = new TitleDaoImpl();

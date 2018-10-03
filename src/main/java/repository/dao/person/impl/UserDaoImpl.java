@@ -1,10 +1,9 @@
-package repository.dao.person;
+package repository.dao.person.impl;
 
 import org.apache.log4j.Logger;
 import pojo.person.Person;
 import repository.ConnectionManager.ConnectionManager;
 import repository.ConnectionManager.ConnectionManagerMobileDB;
-import repository.dao.person.impl.RoleDaoImpl;
 import repository.dao.person.interfaces.RoleDao;
 import repository.dao.person.interfaces.UserDao;
 
