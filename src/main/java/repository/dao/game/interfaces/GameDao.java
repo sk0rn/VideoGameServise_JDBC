@@ -14,9 +14,8 @@ public interface GameDao {
 
     boolean deleteById(Integer id);
 
-    List<Game> getAll();
+    List<Game> getAll(String query);
 
-    List<Game> getAllByGenre(Integer genreId);
+    List<Game> getAllByFeature(String query, Integer featureId);
 
-    List<Game> getAllByDeveloper(Integer devId);
 }

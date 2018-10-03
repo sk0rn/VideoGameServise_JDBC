@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface GameService {
 
-    List<Game> getAllByGenre(Integer genreId);
+    List<Game> getAllByFeature(String query, Integer featureId);
 
-    List<Game> getAllByDeveloper(Integer devId);
-
-    List<Game> getAllGames();
+    List<Game> getAllGames(String query);
 }

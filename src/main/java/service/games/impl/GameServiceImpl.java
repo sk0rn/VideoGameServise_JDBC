@@ -20,18 +20,13 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<Game> getAllByGenre(Integer genreId) {
-        return gameDao.getAllByGenre(genreId);
+    public List<Game> getAllByFeature(String query, Integer featureId) {
+        return gameDao.getAllByFeature(query, featureId);
     }
 
     @Override
-    public List<Game> getAllByDeveloper(Integer devId) {
-        return gameDao.getAllByDeveloper(devId);
-    }
-
-    @Override
-    public List<Game> getAllGames() {
-        return gameDao.getAll();
+    public List<Game> getAllGames(String query) {
+        return gameDao.getAll(query);
     }
 
 }

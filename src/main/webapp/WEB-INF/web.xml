@@ -15,7 +15,6 @@
         <servlet-name>games</servlet-name>
         <servlet-class>controller.GameServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>games</servlet-name>
         <url-pattern>/games</url-pattern>
@@ -25,7 +24,6 @@
         <servlet-name>games_list</servlet-name>
         <servlet-class>controller.GameListServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>games_list</servlet-name>
         <url-pattern>/games_list</url-pattern>
@@ -35,7 +33,6 @@
         <servlet-name>genres</servlet-name>
         <servlet-class>controller.GenreServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>genres</servlet-name>
         <url-pattern>/genres</url-pattern>
@@ -45,7 +42,6 @@
         <servlet-name>developers</servlet-name>
         <servlet-class>controller.DevServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>developers</servlet-name>
         <url-pattern>/developers</url-pattern>
@@ -86,5 +82,4 @@
         <filter-name>inner_filter</filter-name>
         <url-pattern>/inner/*</url-pattern>
     </filter-mapping>
-
 </web-app>

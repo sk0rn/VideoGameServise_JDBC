@@ -7,16 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="header.jsp"%>
-<%
-    if (((Integer)1).equals(request.getSession().getAttribute("role"))) {
-%>
-<form action="/add_developer" method="post">
-    <input type="country" name="name"/>
-    <input type="submit" title="ok">
-</form>
-<%
-    }
-%>
 <table>
     <tr>
         <th>Developer</th>

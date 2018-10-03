@@ -1,5 +1,6 @@
 package controller;
 
+import constants.SQLRequests;
 import pojo.game.Game;
 import service.games.impl.GameServiceImpl;
 
@@ -25,11 +26,12 @@ public class GameServlet extends HttpServlet {
         List<Game> games = null;
                 switch(req.getParameter("type")){
                     case"devs":
-                        games = gameService.getAllByDeveloper(
+                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_DEVS,
                                 Integer.parseInt(req.getParameter("id")));
                         break;
+                    default:
                     case"genres":
-                        games =  gameService.getAllByGenre(
+                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_GENRES,
                                 Integer.parseInt(req.getParameter("id")));
                         break;
                 }
