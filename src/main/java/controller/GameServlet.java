@@ -1,6 +1,7 @@
 package controller;
 
 import constants.SQLRequests;
+import constants.WEBConstants;
 import pojo.game.Game;
 import service.games.impl.GameServiceImpl;
 
@@ -23,21 +24,21 @@ public class GameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<Game> games = null;
+        List<Game> games;
                 switch(req.getParameter("type")){
                     case"devs":
                         games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_DEVS,
-                                Integer.parseInt(req.getParameter("id")));
+                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
                         break;
                     default:
                     case"genres":
                         games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_GENRES,
-                                Integer.parseInt(req.getParameter("id")));
+                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
                         break;
                 }
-        req.setAttribute("title", "Games");
-        req.setAttribute("games", games);
-        req.getRequestDispatcher("/games.jsp").forward(req, resp);
+        req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Games");
+        req.setAttribute(WEBConstants.ATTRIBUTE_GAMES, games);
+        req.getRequestDispatcher(WEBConstants.JSP_GAMES).forward(req, resp);
     }
 
 }

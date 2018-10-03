@@ -1,5 +1,7 @@
 package controller.filter;
 
+import constants.WEBConstants;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class InnerFilter implements Filter {
+
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -18,12 +22,12 @@ public class InnerFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) req;
         HttpSession httpSession = httpServletRequest.getSession();
 
-        if (httpSession.getAttribute("login") != null) {
+        if (httpSession.getAttribute(WEBConstants.LOGIN) != null) {
             chain.doFilter(req, resp);
         } else {
             HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() +
-                    "/login?errorCode=accessDenied");
+                    WEBConstants.ERROR_CODE_LOGIN+WEBConstants.ACCESS_DENIED);
         }
 
 

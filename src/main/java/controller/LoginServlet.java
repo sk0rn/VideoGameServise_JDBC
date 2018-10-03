@@ -1,5 +1,6 @@
 package controller;
 
+import constants.WEBConstants;
 import service.person.LoginService;
 import service.person.LoginServiceImpl;
 
@@ -25,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         if ("logout".equals(req.getParameter("action"))) {
             req.getSession().invalidate();
         }
-        if (req.getSession().getAttribute("login") != null) {
+        if (req.getSession().getAttribute(WEBConstants.LOGIN) != null) {
             resp.sendRedirect("/inner/dashboard");
         } else {
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
@@ -36,15 +37,15 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        String login = req.getParameter(WEBConstants.LOGIN);
+        String password = req.getParameter(WEBConstants.PASS);
         if (loginService.checkAuth(login, password)) {
             int role = loginService.getRole(login);
-            req.getSession().setAttribute("login", login);
-            req.getSession().setAttribute("role", role);
+            req.getSession().setAttribute(WEBConstants.LOGIN, login);
+            req.getSession().setAttribute(WEBConstants.ROLE, role);
             resp.sendRedirect("/inner/dashboard");
         } else {
-            resp.sendRedirect("/login?errorCode=wrongLogin");
+            resp.sendRedirect(WEBConstants.ERROR_CODE_LOGIN+WEBConstants.WRONG_LOGIN);
         }
     }
 }

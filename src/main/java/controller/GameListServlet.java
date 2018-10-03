@@ -1,6 +1,7 @@
 package controller;
 
 import constants.SQLRequests;
+import constants.WEBConstants;
 import pojo.game.Game;
 import service.games.impl.GameServiceImpl;
 
@@ -25,8 +26,8 @@ public class GameListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Game> games = gameService.getAllGames(SQLRequests.SELECT_GAMES_ALL);
-        req.setAttribute("title", "All Games");
-        req.setAttribute("games", games);
-        req.getRequestDispatcher("/games.jsp").forward(req, resp);
+        req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "All Games");
+        req.setAttribute(WEBConstants.ATTRIBUTE_GAMES, games);
+        req.getRequestDispatcher(WEBConstants.JSP_GAMES).forward(req, resp);
     }
 }

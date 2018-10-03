@@ -1,5 +1,6 @@
 package controller;
 
+import constants.WEBConstants;
 import service.games.impl.GenreFeatureImpl;
 import service.games.interfaces.GameFeatureService;
 
@@ -20,14 +21,8 @@ public class GenreServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("title", "Genres");
+        req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Genres");
         req.setAttribute("genres", genreService.getAllFeatures());
         req.getRequestDispatcher("/genres.jsp").forward(req,resp);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
-
 }

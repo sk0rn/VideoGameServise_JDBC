@@ -1,5 +1,6 @@
 package repository.dao.person;
 
+import org.apache.log4j.Logger;
 import pojo.person.Person;
 import repository.ConnectionManager.ConnectionManager;
 import repository.ConnectionManager.ConnectionManagerMobileDB;
@@ -14,7 +15,8 @@ import java.sql.SQLException;
 
 public class UserDaoImpl implements UserDao {
 
-    ConnectionManager connectionManager = ConnectionManagerMobileDB.getInstance();
+    private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
+    private ConnectionManager connectionManager = ConnectionManagerMobileDB.getInstance();
     private RoleDao roleDao  = new RoleDaoImpl();
 
     @Override
@@ -38,7 +40,7 @@ public class UserDaoImpl implements UserDao {
 
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error(e);
             }
         }
         return null;
