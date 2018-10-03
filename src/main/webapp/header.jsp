@@ -16,7 +16,15 @@
 
     <header class="header">
         <strong>Header:</strong>
-
+        <div>
+            <%--если мы залогины, то будем видеть кнопку Выыйти,
+            при нажатии на которую попадем в сервлет LoginServlet,
+            произойдет разрыв сессии--%>
+            <% if (request.getSession().getAttribute("login") != null) {%>
+            Вы вошли как <%=request.getSession().getAttribute("login")%>
+            <a href="/login?action=logout">Выйти</a>
+            <%}%>
+        </div>
     </header><!-- .header-->
 
     <div class="middle">

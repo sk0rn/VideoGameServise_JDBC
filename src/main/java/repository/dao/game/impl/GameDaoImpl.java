@@ -10,14 +10,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameDaoImp implements GameDao {
+public class GameDaoImpl implements GameDao {
 
     private TitleDao titleDao = new TitleDaoImpl();
     private GenreDao genreDao = new GenreDaoImpl();
     private DeveloperDao devDao = new DeveloperDaoImpl();
     private PublisherDao pubDao = new PublisherDaoImpl();
     private PlatformDao platformDao = new PlatformDaoImpl();
-    private static final Logger LOGGER = Logger.getLogger(GameDaoImp.class);
+    private static final Logger LOGGER = Logger.getLogger(GameDaoImpl.class);
     private static ConnectionManager connectionManager =
             ConnectionManagerMobileDB.getInstance();
 
@@ -126,7 +126,7 @@ public class GameDaoImp implements GameDao {
                 games = new ArrayList<>();
                 while (resultSet.next()) {
                     games.add(new Game(
-                            resultSet.getInt(1),
+                            resultSet.getInt("id"),
                             titleDao.getById(resultSet.getInt(2)),
                             resultSet.getInt(3),
                             genreDao.getById(resultSet.getInt(4)),

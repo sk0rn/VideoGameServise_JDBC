@@ -1,7 +1,7 @@
 package service.games.impl;
 
 import pojo.game.Game;
-import repository.dao.game.impl.GameDaoImp;
+import repository.dao.game.impl.GameDaoImpl;
 import repository.dao.game.interfaces.GameDao;
 import service.games.interfaces.GameService;
 
@@ -12,7 +12,7 @@ public class GameServiceImpl implements GameService {
     private GameDao gameDao;
 
     public GameServiceImpl() {
-        gameDao = new GameDaoImp();
+        gameDao = new GameDaoImpl();
     }
 
     public GameServiceImpl(GameDao gameDao) {

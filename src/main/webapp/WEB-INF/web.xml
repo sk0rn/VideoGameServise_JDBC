@@ -61,15 +61,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>input_dev_info</servlet-name>
-        <jsp-file>/add_brand.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>input_dev_info</servlet-name>
-        <url-pattern>/inner/input_dev_info</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>login</servlet-name>
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
@@ -87,6 +78,13 @@
         <url-pattern>/inner/dashboard</url-pattern>
     </servlet-mapping>
 
-
+    <filter>
+        <filter-name>inner_filter</filter-name>
+        <filter-class>controller.filter.InnerFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>inner_filter</filter-name>
+        <url-pattern>/inner/*</url-pattern>
+    </filter-mapping>
 
 </web-app>
