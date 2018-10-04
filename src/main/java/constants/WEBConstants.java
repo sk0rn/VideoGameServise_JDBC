@@ -18,7 +18,7 @@ public class WEBConstants {
     public static final String ATTRIBUTE_TITLE = "title";
     public static final String ATTRIBUTE_GAMES = "games";
 
-    public static final String JSP_GAMES = "/games.jsp";
+    public static final String JSP_GAMES = "/game_content/games.jsp";
 
 
 }

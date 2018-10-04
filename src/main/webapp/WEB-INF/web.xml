@@ -13,7 +13,7 @@
 
     <servlet>
         <servlet-name>games</servlet-name>
-        <servlet-class>controller.GameServlet</servlet-class>
+        <servlet-class>controller.content.GameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>games</servlet-name>
@@ -22,7 +22,7 @@
 
     <servlet>
         <servlet-name>games_list</servlet-name>
-        <servlet-class>controller.GameListServlet</servlet-class>
+        <servlet-class>controller.content.GameListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>games_list</servlet-name>
@@ -31,7 +31,7 @@
 
     <servlet>
         <servlet-name>genres</servlet-name>
-        <servlet-class>controller.GenreServlet</servlet-class>
+        <servlet-class>controller.content.GenreServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>genres</servlet-name>
@@ -39,8 +39,17 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>titles</servlet-name>
+        <servlet-class>controller.content.TitleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>titles</servlet-name>
+        <url-pattern>/titles</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>developers</servlet-name>
-        <servlet-class>controller.DevServlet</servlet-class>
+        <servlet-class>controller.content.DevServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>developers</servlet-name>
@@ -48,12 +57,49 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>platforms</servlet-name>
+        <servlet-class>controller.content.PlatformServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>platforms</servlet-name>
+        <url-pattern>/platforms</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>add_genre</servlet-name>
+        <servlet-class>controller.content.GenreServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>add_genre</servlet-name>
+        <url-pattern>/add_genre</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>add_title</servlet-name>
+        <servlet-class>controller.content.TitleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>add_title</servlet-name>
+        <url-pattern>/add_title</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>add_developer</servlet-name>
-        <servlet-class>controller.DevServlet</servlet-class>
+        <servlet-class>controller.content.DevServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>add_developer</servlet-name>
         <url-pattern>/add_developer</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>add_platform</servlet-name>
+        <servlet-class>controller.content.PlatformServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>add_platform</servlet-name>
+        <url-pattern>/add_platform</url-pattern>
     </servlet-mapping>
 
     <servlet>

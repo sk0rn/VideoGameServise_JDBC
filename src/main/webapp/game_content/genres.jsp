@@ -6,7 +6,7 @@
   Time: 20:44
   To change this template use File | Settings | File Templates.
 --%>
-<%@include file="header.jsp"%>
+<%@include file="../header.jsp"%>
 <table>
     <tr>
         <th>Genre</th>
@@ -24,5 +24,5 @@
     %>
 
 </table>
-<%@include file="footer.jsp"%>
+<%@include file="../footer.jsp"%>
 

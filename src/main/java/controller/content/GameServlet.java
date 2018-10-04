@@ -1,4 +1,4 @@
-package controller;
+package controller.content;
 
 import constants.SQLRequests;
 import constants.WEBConstants;
@@ -26,8 +26,16 @@ public class GameServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Game> games;
                 switch(req.getParameter("type")){
+                    case"titles":
+                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_TITLES,
+                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
+                        break;
                     case"devs":
                         games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_DEVS,
+                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
+                        break;
+                    case"platforms":
+                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_PLATFORMS,
                                 Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
                         break;
                     default:

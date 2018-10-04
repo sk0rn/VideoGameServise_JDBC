@@ -6,7 +6,7 @@
   Time: 20:40
   To change this template use File | Settings | File Templates.
 --%>
-<%@include file="header.jsp"%>
+<%@include file="../header.jsp"%>
 <table border="1">
 
     <tr>
@@ -40,4 +40,4 @@
     %>
 
 </table>
-<%@include file="footer.jsp"%>
+<%@include file="../footer.jsp"%>

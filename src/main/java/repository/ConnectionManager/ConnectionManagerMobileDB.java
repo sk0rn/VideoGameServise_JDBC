@@ -16,16 +16,13 @@ public class ConnectionManagerMobileDB implements ConnectionManager {
     private static final String CONFIG =
             "D:\\dev_edu\\STC13_HT\\Prjct01_VGS_JDBC\\src\\main\\resources\\conf\\settings.cfg";
 
-    // приватный контсруктор, что бы нельзя было создавать объекты менеджера
     private ConnectionManagerMobileDB() {
     }
 
     public static ConnectionManager getInstance() {
-        // если объект не создан, то создается
         if (connectionManager == null) {
             connectionManager = new ConnectionManagerMobileDB();
         }
-        // возвращаем объект, если он был создан, то вернется уже имеющийся
         return connectionManager;
     }
 

@@ -1,4 +1,4 @@
-package controller;
+package controller.content;
 
 import constants.SQLRequests;
 import constants.WEBConstants;

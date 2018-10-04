@@ -1,4 +1,4 @@
-package controller;
+package controller.content;
 
 import constants.WEBConstants;
 import service.games.impl.DeveloperFeatureImpl;
@@ -23,7 +23,7 @@ public class DevServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("developers", devService.getAllFeatures());
         req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Developers");
-        req.getRequestDispatcher("/developers.jsp").forward(req,resp);
+        req.getRequestDispatcher("/game_content/developers.jsp").forward(req,resp);
     }
 
     @Override
