@@ -57,12 +57,30 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>publishers</servlet-name>
+        <servlet-class>controller.content.PubServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>publishers</servlet-name>
+        <url-pattern>/publishers</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>platforms</servlet-name>
         <servlet-class>controller.content.PlatformServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>platforms</servlet-name>
         <url-pattern>/platforms</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>add_game</servlet-name>
+        <servlet-class>controller.content.AddGameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>add_game</servlet-name>
+        <url-pattern>/add_content/add_game</url-pattern>
     </servlet-mapping>
 
 
@@ -91,6 +109,15 @@
     <servlet-mapping>
         <servlet-name>add_developer</servlet-name>
         <url-pattern>/add_developer</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>add_publisher</servlet-name>
+        <servlet-class>controller.content.PubServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>add_publisher</servlet-name>
+        <url-pattern>/add_publisher</url-pattern>
     </servlet-mapping>
 
     <servlet>

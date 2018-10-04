@@ -22,9 +22,12 @@
 
     <%
         List<Game> games = (List<Game>) request.getAttribute("games");
+        String style;
+        int addedGame = request.getAttribute("new game id") == null ? -1 : (int)request.getAttribute("new game id");
     for (int i = 0; i < games.size(); i++) {
+        style = addedGame == games.get(i).getId() ? "background-color: #76ffdb" : "";
     %>
-    <tr>
+    <tr style="<%=style%>">
         <td><%=games.get(i).getTitle().getName()%></td>
         <td><%=games.get(i).getQuantity()%></td>
         <td><%=games.get(i).getGenre().getName()%></td>

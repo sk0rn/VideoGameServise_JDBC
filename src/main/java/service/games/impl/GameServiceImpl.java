@@ -1,6 +1,6 @@
 package service.games.impl;
 
-import pojo.game.Game;
+import pojo.game.*;
 import repository.dao.game.impl.GameDaoImpl;
 import repository.dao.game.interfaces.GameDao;
 import service.games.interfaces.GameService;
@@ -27,6 +27,18 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<Game> getAllGames(String query) {
         return gameDao.getAll(query);
+    }
+
+    @Override
+    public int addGame(Game game) {
+        return gameDao.add(game);
+    }
+
+    @Override
+    public int addGame(int titleId, int quantity, int genreId, int devId,
+                       int pubId, int year, int platformId, int price) {
+        return gameDao.add(titleId, quantity, genreId, devId, pubId,
+                year, platformId, price);
     }
 
 }

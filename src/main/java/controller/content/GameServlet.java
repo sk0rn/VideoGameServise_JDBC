@@ -34,6 +34,10 @@ public class GameServlet extends HttpServlet {
                         games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_DEVS,
                                 Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
                         break;
+                    case"pubs":
+                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_PUBS,
+                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
+                        break;
                     case"platforms":
                         games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_PLATFORMS,
                                 Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));

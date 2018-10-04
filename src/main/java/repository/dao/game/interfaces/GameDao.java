@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface GameDao {
 
-    boolean add(Game game);
+    int add(Game game);
+
+    int add(int titleId, int quantity, int genreId, int devId,
+                int pubId, int year, int platformId, int price);
 
     Game getById(Integer id);
 

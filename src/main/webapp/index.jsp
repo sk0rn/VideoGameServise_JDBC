@@ -4,5 +4,5 @@
 
 %>
 <%@include file="header.jsp"%>
-<a href="/login">Войти в систему</a>
+<br>
 <%@include file="footer.jsp"%>

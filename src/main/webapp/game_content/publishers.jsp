@@ -1,6 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="pojo.game.Developer" %>
-<%@ page import="pojo.game.Title" %><%--
+<%@ page import="pojo.game.Publisher" %><%--
   Created by IntelliJ IDEA.
   User: sk0rn
   Date: 01.10.2018
@@ -10,15 +9,15 @@
 <%@include file="../header.jsp"%>
 <table>
     <tr>
-        <th>Title</th>
+        <th>Publisher</th>
     </tr>
 
     <%
-        List<Title> titles = (List<Title>) request.getAttribute("titles");
-        for (int i = 0; i < titles.size(); i++) {
+        List<Publisher> pubs = (List<Publisher>) request.getAttribute("publishers");
+        for (int i = 0; i < pubs.size(); i++) {
     %>
     <tr>
-        <td><a href="/games?id=<%=titles.get(i).getId()%>&type=titles"><%=titles.get(i).getName()%></a></td>
+        <td><a href="/games?id=<%=pubs.get(i).getId()%>&type=pubs"><%=pubs.get(i).getName()%></a></td>
     </tr>
     <%
         }

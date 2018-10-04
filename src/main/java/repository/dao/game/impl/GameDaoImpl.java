@@ -22,7 +22,7 @@ public class GameDaoImpl implements GameDao {
             ConnectionManagerMobileDB.getInstance();
 
     @Override
-    public boolean add(Game game) {
+    public int add(Game game) {
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "INSERT INTO games values (DEFAULT, " +
@@ -38,18 +38,52 @@ public class GameDaoImpl implements GameDao {
             preparedStatement.setInt(8, game.getPrice());
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                Integer id = -1;
                 if (resultSet.next()) {
-                    Integer id = resultSet.getInt(1);
+                    id = resultSet.getInt(1);
                     LOGGER.info("The new object Game in DB was assigned the id: "
                             + id);
                 }
-                return true;
+                return id;
             }
 
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return false;
+        return -1;
+    }
+
+    @Override
+    public int add(int titleId, int quantity, int genreId, int devId,
+                   int pubId, int year, int platformId, int price) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO games values (DEFAULT, " +
+                             "?, ?, ?, ?, ?, ?, ?, ?) RETURNING id ")) {
+
+            preparedStatement.setInt(1, titleId);
+            preparedStatement.setInt(2, quantity);
+            preparedStatement.setInt(3, genreId);
+            preparedStatement.setInt(4, devId);
+            preparedStatement.setInt(5, pubId);
+            preparedStatement.setInt(6, year);
+            preparedStatement.setInt(7, platformId);
+            preparedStatement.setInt(8, price);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                Integer id = -1;
+                if (resultSet.next()) {
+                    id = resultSet.getInt(1);
+                    LOGGER.info("The new object Game in DB was assigned the id: "
+                            + id);
+                }
+                return id;
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return -1;
     }
 
     @Override

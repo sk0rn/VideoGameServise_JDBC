@@ -15,16 +15,27 @@
 <div class="wrapper">
 
     <header class="header">
-        <strong>Header:</strong>
-        <div>
-            <%--если мы залогины, то будем видеть кнопку Выыйти,
-            при нажатии на которую попадем в сервлет LoginServlet,
-            произойдет разрыв сессии--%>
+        <table width="100%"><tr><td width="100%">
+
+            <strong>Header:</strong>
+            <div>
+                dfhfgh
+                <%--если мы залогины, то будем видеть кнопку Выыйти,
+                при нажатии на которую попадем в сервлет LoginServlet,
+                произойдет разрыв сессии--%>
+            </div>
+            </td><td width="*">
+
             <% if (request.getSession().getAttribute("login") != null) {%>
-            Вы вошли как <%=request.getSession().getAttribute("login")%>
+            Вы&nbsp;вошли&nbsp;как&nbsp;<%=request.getSession().getAttribute("login")%>
             <a href="/login?action=logout">Выйти</a>
             <%}%>
-        </div>
+
+            <% if (request.getSession().getAttribute("login") == null) {%>
+            <a href="/login">Войти&nbsp;в&nbsp;систему</a>
+            <%}%>
+        </td></tr></table>
+
     </header><!-- .header-->
 
     <div class="middle">
