@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class InnerFilter implements Filter {
-
-
+public class AdminContentFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -22,15 +20,15 @@ public class InnerFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) req;
         HttpSession httpSession = httpServletRequest.getSession();
 
-        if (httpSession.getAttribute(WEBConstants.LOGIN) != null) {
+        if (httpSession.getAttribute(WEBConstants.LOGIN) != null &&
+                httpSession.getAttribute(WEBConstants.ROLE) != null &&
+                (Integer)httpSession.getAttribute(WEBConstants.ROLE) == 1) {
             chain.doFilter(req, resp);
         } else {
             HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() +
                     WEBConstants.ERROR_CODE_LOGIN+WEBConstants.ACCESS_DENIED);
         }
-
-
     }
 
     @Override

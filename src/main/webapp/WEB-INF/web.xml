@@ -147,12 +147,31 @@
         <url-pattern>/inner/dashboard</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>basket</servlet-name>
+        <servlet-class>controller.customer.BasketServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>basket</servlet-name>
+        <url-pattern>/customer/basket</url-pattern>
+    </servlet-mapping>
+
     <filter>
-        <filter-name>inner_filter</filter-name>
-        <filter-class>controller.filter.InnerFilter</filter-class>
+        <filter-name>admin_filter</filter-name>
+        <filter-class>controller.filter.AdminContentFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>inner_filter</filter-name>
-        <url-pattern>/inner/*</url-pattern>
+        <filter-name>admin_filter</filter-name>
+        <url-pattern>/add_content/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>customer_filter</filter-name>
+        <filter-class>controller.filter.CustomerContentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>customer_filter</filter-name>
+        <url-pattern>/customer/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

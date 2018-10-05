@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,12 +20,14 @@
 
             <strong>Header:</strong>
             <div>
-                dfhfgh
-                <%--если мы залогины, то будем видеть кнопку Выыйти,
+                <%--если мы залогины, то будем видеть кнопку Выйти,
                 при нажатии на которую попадем в сервлет LoginServlet,
                 произойдет разрыв сессии--%>
             </div>
             </td><td width="*">
+            <c:if test='${role != null && role == 8}'>
+                <a href="/customer/basket">Корзина</a>
+            </c:if>
 
             <% if (request.getSession().getAttribute("login") != null) {%>
             Вы&nbsp;вошли&nbsp;как&nbsp;<%=request.getSession().getAttribute("login")%>
