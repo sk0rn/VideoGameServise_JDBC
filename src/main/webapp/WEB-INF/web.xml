@@ -156,6 +156,15 @@
         <url-pattern>/customer/basket</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>cookie</servlet-name>
+        <servlet-class>controller.customer.BasketServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cookie</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>admin_filter</filter-name>
         <filter-class>controller.filter.AdminContentFilter</filter-class>

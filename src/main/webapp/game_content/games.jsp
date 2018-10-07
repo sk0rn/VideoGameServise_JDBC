@@ -82,7 +82,7 @@
     // обрабатываем события после нажатия кнопки добавить игру в корзину (add)
     function handleAddButton(id, name) {
         document.getElementById("g_uid" + id).disabled = true;
-        setCookie("g_uid" + id, name, 365);
+        setCookie("g_uid" + id, encodeURI(name), 365);
         alert("Игра " + name + " добавлена в корзину");
     }
 

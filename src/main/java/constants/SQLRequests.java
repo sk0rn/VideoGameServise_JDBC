@@ -21,6 +21,8 @@ public class SQLRequests {
             "  JOIN publishers pub on game.publisher_id = pub.id\n" +
             "  JOIN platforms platform on game.platform_id = platform.id";
 
+    public static final String SELECT_GAME_BY_IDS = SELECT_GAMES_ALL + " WHERE game.id in";
+    public static final String SELECT_GAME_BY_ID = SELECT_GAMES_ALL + " WHERE game.id=?";
     public static final String SELECT_GAMES_BY_GENRES = SELECT_GAMES_ALL + " WHERE genre_id=?";
     public static final String SELECT_GAMES_BY_TITLES = SELECT_GAMES_ALL +  " WHERE title_id=?";
     public static final String SELECT_GAMES_BY_DEVS = SELECT_GAMES_ALL +  " WHERE developer_id=?";

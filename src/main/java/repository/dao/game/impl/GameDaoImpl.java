@@ -1,5 +1,7 @@
 package repository.dao.game.impl;
 
+import constants.SQLConstants;
+import constants.SQLRequests;
 import org.apache.log4j.Logger;
 import pojo.game.*;
 import repository.ConnectionManager.ConnectionManager;
@@ -10,13 +12,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameDaoImpl implements GameDao {
+import static constants.SQLConstants.*;
 
-    private TitleDao titleDao = new TitleDaoImpl();
-    private GenreDao genreDao = new GenreDaoImpl();
-    private DeveloperDao devDao = new DeveloperDaoImpl();
-    private PublisherDao pubDao = new PublisherDaoImpl();
-    private PlatformDao platformDao = new PlatformDaoImpl();
+public class GameDaoImpl implements GameDao {
     private static final Logger LOGGER = Logger.getLogger(GameDaoImpl.class);
     private static ConnectionManager connectionManager =
             ConnectionManagerMobileDB.getInstance();
@@ -90,20 +88,25 @@ public class GameDaoImpl implements GameDao {
     public Game getById(Integer id) {
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT * FROM games WHERE id = ?")) {
+                     SQLRequests.SELECT_GAME_BY_ID)) {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return new Game(
-                            resultSet.getInt(1),
-                            titleDao.getById(resultSet.getInt(2)),
-                            resultSet.getInt(3),
-                            genreDao.getById(resultSet.getInt(4)),
-                            devDao.getById(resultSet.getInt(5)),
-                            pubDao.getById(resultSet.getInt(6)),
-                            resultSet.getInt(7),
-                            platformDao.getById(resultSet.getInt(8)),
-                            resultSet.getInt(9));
+                            resultSet.getInt(GAME_ID),
+                            new Title(resultSet.getInt(TITLE_ID),
+                                    resultSet.getString(TITLE_NAME)),
+                            resultSet.getInt(QUANTITY),
+                            new Genre(resultSet.getInt(GENRE_ID),
+                                    resultSet.getString(GENRE_NAME)),
+                            new Developer(resultSet.getInt(DEV_ID),
+                                    resultSet.getString(DEV_NAME)),
+                            new Publisher(resultSet.getInt(PUB_ID),
+                                    resultSet.getString(PUB_NAME)),
+                            resultSet.getInt(YEAR),
+                            new Platform(resultSet.getInt(PLATFORM_ID),
+                                    resultSet.getString(PLATFORM_NAME)),
+                            resultSet.getInt(PRICE));
                 }
             }
         } catch (SQLException e) {
@@ -160,20 +163,20 @@ public class GameDaoImpl implements GameDao {
                 games = new ArrayList<>();
                 while (resultSet.next()) {
                     games.add(new Game(
-                            resultSet.getInt("game_id"),
-                            new Title(resultSet.getInt("title_id"),
-                                    resultSet.getString("title_name")),
-                            resultSet.getInt("quantity"),
-                            new Genre(resultSet.getInt("genre_id"),
-                                    resultSet.getString("genre_name")),
-                            new Developer(resultSet.getInt("dev_id"),
-                                    resultSet.getString("dev_name")),
-                            new Publisher(resultSet.getInt("pub_id"),
-                                    resultSet.getString("pub_name")),
-                            resultSet.getInt("year"),
-                            new Platform(resultSet.getInt("platform_id"),
-                                    resultSet.getString("platform_name")),
-                            resultSet.getInt("price")));
+                            resultSet.getInt(GAME_ID),
+                            new Title(resultSet.getInt(TITLE_ID),
+                                    resultSet.getString(TITLE_NAME)),
+                            resultSet.getInt(QUANTITY),
+                            new Genre(resultSet.getInt(GENRE_ID),
+                                    resultSet.getString(GENRE_NAME)),
+                            new Developer(resultSet.getInt(DEV_ID),
+                                    resultSet.getString(DEV_NAME)),
+                            new Publisher(resultSet.getInt(PUB_ID),
+                                    resultSet.getString(PUB_NAME)),
+                            resultSet.getInt(YEAR),
+                            new Platform(resultSet.getInt(PLATFORM_ID),
+                                    resultSet.getString(PLATFORM_NAME)),
+                            resultSet.getInt(PRICE)));
                 }
             }
 
@@ -195,20 +198,20 @@ public class GameDaoImpl implements GameDao {
                 games = new ArrayList<>();
                 while (resultSet.next()) {
                     games.add(new Game(
-                            resultSet.getInt("game_id"),
-                            new Title(resultSet.getInt("title_id"),
-                                    resultSet.getString("title_name")),
-                            resultSet.getInt("quantity"),
-                            new Genre(resultSet.getInt("genre_id"),
-                                    resultSet.getString("genre_name")),
-                            new Developer(resultSet.getInt("dev_id"),
-                                    resultSet.getString("dev_name")),
-                            new Publisher(resultSet.getInt("pub_id"),
-                                    resultSet.getString("pub_name")),
-                            resultSet.getInt("year"),
-                            new Platform(resultSet.getInt("platform_id"),
-                                    resultSet.getString("platform_name")),
-                            resultSet.getInt("price")));
+                            resultSet.getInt(GAME_ID),
+                            new Title(resultSet.getInt(TITLE_ID),
+                                    resultSet.getString(TITLE_NAME)),
+                            resultSet.getInt(QUANTITY),
+                            new Genre(resultSet.getInt(GENRE_ID),
+                                    resultSet.getString(GENRE_NAME)),
+                            new Developer(resultSet.getInt(DEV_ID),
+                                    resultSet.getString(DEV_NAME)),
+                            new Publisher(resultSet.getInt(PUB_ID),
+                                    resultSet.getString(PUB_NAME)),
+                            resultSet.getInt(YEAR),
+                            new Platform(resultSet.getInt(PLATFORM_ID),
+                                    resultSet.getString(PLATFORM_NAME)),
+                            resultSet.getInt(PRICE)));
                 }
             }
 

@@ -29,9 +29,6 @@ public class CustomerContentFilter implements Filter {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() +
                     WEBConstants.ERROR_CODE_LOGIN+WEBConstants.ACCESS_DENIED);
         }
-        if (true)  {
-            System.out.println("!!");
-        }
     }
 
     @Override
