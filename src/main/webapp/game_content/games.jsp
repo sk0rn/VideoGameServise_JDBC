@@ -87,11 +87,11 @@
     }
 
     // устанавиливаем куки
-    function setCookie(cname, cvalue, exdays) {
+    function setCookie(cName, cValue, exDays) {
         var d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        d.setTime(d.getTime() + (exDays * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        document.cookie = cName + "=" + cValue + ";" + expires + ";path=/";
     }
 
     // получаем список куки
