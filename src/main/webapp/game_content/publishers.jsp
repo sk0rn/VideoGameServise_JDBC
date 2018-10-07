@@ -17,7 +17,7 @@
         for (int i = 0; i < pubs.size(); i++) {
     %>
     <tr>
-        <td><a href="/games?id=<%=pubs.get(i).getId()%>&type=pubs"><%=pubs.get(i).getName()%></a></td>
+        <td><a href="/games?id=<%=pubs.get(i).getId()%>&type=publishers"><%=pubs.get(i).getName()%></a></td>
     </tr>
     <%
         }

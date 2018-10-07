@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static constants.WEBConstants.*;
+
 public class AddGameServlet extends HttpServlet {
 
     private GameFeatureService titleService;
@@ -41,13 +43,12 @@ public class AddGameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.setAttribute("titles", titleService.getAllFeatures());
-        req.setAttribute("genres", genreService.getAllFeatures());
-        req.setAttribute("developers", devService.getAllFeatures());
-        req.setAttribute("publishers", pubService.getAllFeatures());
-        req.setAttribute("platforms", platformService.getAllFeatures());
-
-        req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Add game");
+        req.setAttribute(ATTRIBUTE_TITLES, titleService.getAllFeatures());
+        req.setAttribute(ATTRIBUTE_GENRES, genreService.getAllFeatures());
+        req.setAttribute(ATTRIBUTE_DEVS, devService.getAllFeatures());
+        req.setAttribute(ATTRIBUTE_PUBS, pubService.getAllFeatures());
+        req.setAttribute(ATTRIBUTE_PLATFORMS, platformService.getAllFeatures());
+        req.setAttribute(ATTRIBUTE_TITLE, "Add game");
         req.getRequestDispatcher("/add_content/add_game.jsp").forward(req, resp);
     }
 
@@ -56,7 +57,7 @@ public class AddGameServlet extends HttpServlet {
 
         try {
             req.setAttribute("new game id",
-                    gameService.addGame(Integer.parseInt(req.getParameter("title")),
+                    gameService.addGame(Integer.parseInt(req.getParameter(ATTRIBUTE_TITLE)),
                             Integer.parseInt(req.getParameter("quantity")),
                             Integer.parseInt(req.getParameter("genre")),
                             Integer.parseInt(req.getParameter("developer")),
@@ -70,7 +71,7 @@ public class AddGameServlet extends HttpServlet {
         }
         List<Game> games = gameService.getAllGames(SQLRequests.SELECT_GAMES_ALL);
         req.setAttribute(WEBConstants.ATTRIBUTE_GAMES, games);
-        req.getRequestDispatcher("/game_content/games.jsp").forward(req, resp);
+        req.getRequestDispatcher(JSP_GAMES).forward(req, resp);
 
 
 

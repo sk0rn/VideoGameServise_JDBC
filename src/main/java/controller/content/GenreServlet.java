@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constants.WEBConstants.ATTRIBUTE_GENRES;
+import static constants.WEBConstants.PARAMETER_NAME;
+
 public class GenreServlet extends HttpServlet {
     private GameFeatureService genreService;
 
@@ -22,13 +25,13 @@ public class GenreServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Genres");
-        req.setAttribute("genres", genreService.getAllFeatures());
+        req.setAttribute(ATTRIBUTE_GENRES, genreService.getAllFeatures());
         req.getRequestDispatcher("/game_content/genres.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
+        String name = req.getParameter(PARAMETER_NAME);
         genreService.addFeature(name);
         this.doGet(req, resp);
     }

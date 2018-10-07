@@ -29,10 +29,6 @@ public class BasketServiceImpl implements BasketService {
     @Override
     public List<Game> showAddedGames(Cookie[] cookies) {
         Integer[] ids = new Integer[cookies.length];
-//        String rawCookies = Arrays.toString(cookies);
-//        Pattern p = Pattern.compile("g_uid(\\d+)=");
-//        Matcher m = p.matcher(rawCookies);
-//        System.out.println(rawCookies);
         try {
             for (int i = 0; i < cookies.length; i++) {
                 if (cookies[i].getName().indexOf("g_uid") == 0) {

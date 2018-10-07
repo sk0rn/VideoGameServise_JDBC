@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constants.WEBConstants.ATTRIBUTE_PUBS;
+import static constants.WEBConstants.PARAMETER_NAME;
+
 public class PubServlet extends HttpServlet {
     private GameFeatureService pubService;
 
@@ -22,14 +25,14 @@ public class PubServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("publishers", pubService.getAllFeatures());
+        req.setAttribute(ATTRIBUTE_PUBS, pubService.getAllFeatures());
         req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Publishers");
         req.getRequestDispatcher("/game_content/publishers.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
+        String name = req.getParameter(PARAMETER_NAME);
         pubService.addFeature(name);
         this.doGet(req, resp);
     }

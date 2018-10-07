@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constants.WEBConstants.*;
+
 public class DevServlet extends HttpServlet {
     private GameFeatureService devService;
 
@@ -21,14 +23,14 @@ public class DevServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("developers", devService.getAllFeatures());
-        req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Developers");
+        req.setAttribute(ATTRIBUTE_DEVS, devService.getAllFeatures());
+        req.setAttribute(ATTRIBUTE_TITLE, "Developers");
         req.getRequestDispatcher("/game_content/developers.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
+        String name = req.getParameter(PARAMETER_NAME);
         devService.addFeature(name);
         this.doGet(req, resp);
     }

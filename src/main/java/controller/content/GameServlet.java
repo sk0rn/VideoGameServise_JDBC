@@ -1,6 +1,5 @@
 package controller.content;
 
-import constants.SQLRequests;
 import constants.WEBConstants;
 import pojo.game.Game;
 import service.games.impl.GameServiceImpl;
@@ -11,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
+import static constants.SQLRequests.*;
+import static constants.WEBConstants.*;
 
 public class GameServlet extends HttpServlet {
     private GameServiceImpl gameService;
@@ -26,31 +28,30 @@ public class GameServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Game> games;
                 switch(req.getParameter("type")){
-                    case"titles":
-                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_TITLES,
-                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
+                    case ATTRIBUTE_TITLES:
+                        games =  gameService.getAllByFeature(SELECT_GAMES_BY_TITLES,
+                                Integer.parseInt(req.getParameter(PARAMETER_ID)));
                         break;
-                    case"devs":
-                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_DEVS,
-                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
+                    case ATTRIBUTE_DEVS:
+                        games =  gameService.getAllByFeature(SELECT_GAMES_BY_DEVS,
+                                Integer.parseInt(req.getParameter(PARAMETER_ID)));
                         break;
-                    case"pubs":
-                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_PUBS,
-                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
+                    case ATTRIBUTE_PUBS:
+                        games =  gameService.getAllByFeature(SELECT_GAMES_BY_PUBS,
+                                Integer.parseInt(req.getParameter(PARAMETER_ID)));
                         break;
-                    case"platforms":
-                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_PLATFORMS,
-                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
+                    case ATTRIBUTE_PLATFORMS:
+                        games =  gameService.getAllByFeature(SELECT_GAMES_BY_PLATFORMS,
+                                Integer.parseInt(req.getParameter(PARAMETER_ID)));
                         break;
                     default:
-                    case"genres":
-                        games =  gameService.getAllByFeature(SQLRequests.SELECT_GAMES_BY_GENRES,
-                                Integer.parseInt(req.getParameter(WEBConstants.PARAMETER_ID)));
+                    case ATTRIBUTE_GENRES:
+                        games =  gameService.getAllByFeature(SELECT_GAMES_BY_GENRES,
+                                Integer.parseInt(req.getParameter(PARAMETER_ID)));
                         break;
                 }
         req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Games");
         req.setAttribute(WEBConstants.ATTRIBUTE_GAMES, games);
         req.getRequestDispatcher(WEBConstants.JSP_GAMES).forward(req, resp);
     }
-
 }

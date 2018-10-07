@@ -14,9 +14,15 @@ public class WEBConstants {
     public static final String WRONG_LOGIN = "wrongLogin";
 
     public static final String PARAMETER_ID = "id";
+    public static final String PARAMETER_NAME = "name";
 
     public static final String ATTRIBUTE_TITLE = "title";
     public static final String ATTRIBUTE_GAMES = "games";
+    public static final String ATTRIBUTE_TITLES = "titles";
+    public static final String ATTRIBUTE_GENRES = "genres";
+    public static final String ATTRIBUTE_DEVS = "developers";
+    public static final String ATTRIBUTE_PUBS = "publishers";
+    public static final String ATTRIBUTE_PLATFORMS = "platforms";
 
     public static final String JSP_GAMES = "/game_content/games.jsp";
 

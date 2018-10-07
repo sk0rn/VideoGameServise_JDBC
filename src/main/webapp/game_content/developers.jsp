@@ -17,7 +17,7 @@
         for (int i = 0; i < devs.size(); i++) {
     %>
     <tr>
-        <td><a href="/games?id=<%=devs.get(i).getId()%>&type=devs"><%=devs.get(i).getName()%></a></td>
+        <td><a href="/games?id=<%=devs.get(i).getId()%>&type=developers"><%=devs.get(i).getName()%></a></td>
     </tr>
     <%
         }
