@@ -9,5 +9,5 @@ public interface BasketService {
 
     List<Game> showAddedGames(Cookie[] cookies);
 
-    boolean checkout(String[] ids);
+    boolean checkout(Cookie[] cookies);
 }

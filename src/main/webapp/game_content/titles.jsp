@@ -1,5 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="pojo.game.Developer" %>
 <%@ page import="pojo.game.Title" %><%--
   Created by IntelliJ IDEA.
   User: sk0rn

@@ -1,10 +1,9 @@
 package controller.content;
 
-import constants.SQLRequests;
+
 import constants.WEBConstants;
 import org.apache.log4j.Logger;
 import pojo.game.Game;
-import repository.dao.game.impl.GameDaoImpl;
 import service.games.impl.*;
 import service.games.interfaces.GameFeatureService;
 import service.games.interfaces.GameService;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static constants.SQLRequests.SELECT_GAMES_ALL;
 import static constants.WEBConstants.*;
 
 public class AddGameServlet extends HttpServlet {
@@ -69,8 +69,8 @@ public class AddGameServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             LOGGER.error(e);
         }
-        List<Game> games = gameService.getAllGames(SQLRequests.SELECT_GAMES_ALL);
-        req.setAttribute(WEBConstants.ATTRIBUTE_GAMES, games);
+        List<Game> games = gameService.getAllGames(SELECT_GAMES_ALL);
+        req.setAttribute(ATTRIBUTE_GAMES, games);
         req.getRequestDispatcher(JSP_GAMES).forward(req, resp);
 
 

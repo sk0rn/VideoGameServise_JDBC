@@ -5,7 +5,6 @@ import pojo.game.*;
 import repository.ConnectionManager.ConnectionManager;
 import repository.ConnectionManager.ConnectionManagerMobileDB;
 import repository.dao.customer.interfaces.BasketDao;
-import repository.dao.game.impl.GameDaoImpl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static constants.SQLConstants.*;
-import static constants.SQLConstants.PRICE;
 import static constants.SQLRequests.SELECT_GAME_BY_IDS;
 
 public class BasketDaoImpl implements BasketDao {
@@ -60,7 +58,25 @@ public class BasketDaoImpl implements BasketDao {
     }
 
     @Override
-    public boolean updateQuantity(Integer[] ids) {
+    public boolean decreaseQuantity(Integer[] ids) {
+        try (Connection connection = connectionManager.getConnection();
+             Statement statement = connection.createStatement()) {
+            try(ResultSet resultSet = statement.executeQuery("UPDATE games\n" +
+                    "SET quantity = quantity - 1\n" +
+                    "WHERE id in (" + Arrays.toString(ids).
+                    replaceAll("[\\[\\]]", "") + ") AND NOT EXISTS(\n" +
+                    "SELECT * FROM games\n" +
+                    "WHERE id in (" + Arrays.toString(ids).
+                    replaceAll("[\\[\\]]", "") + ") AND quantity < 1)\n" +
+                    "RETURNING id")) {
+                // если при уменьшении количества какой-либо из игр, оно будет меньше одного,
+                // то уменьшнение не произойдет ни для одной игры. Метод вернет false, для того
+                // что бы выше сообщить клиенту что с заказом возникла проблема
+                return resultSet.next();
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
         return false;
     }
 }

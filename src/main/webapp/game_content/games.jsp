@@ -53,12 +53,17 @@
         <td>
             <%--показывам кнопку добавить в корзину--%>
             <c:if test='${role != null && role == 8}'>
+                <%
+                    if (game.getQuantity() > 0) {%>
                 <button class="gButton" id="g_uid<%=game.getId()%>" onclick="handleAddButton(<%=game.getId() + ", " +
-         "'" + game.getTitle().getName() + "'"%>)">add</button>
+         "'" + game.getTitle().getName() + "'"%>)">add
+                </button>
+                <%} else {%>
+                <button class="gButton" id="oos">out of stock</button>
+                <%}%>
             </c:if>
         </td>
     </tr>
-
     <%
         }
     %>
@@ -72,7 +77,7 @@
         var vButtons = document.getElementsByClassName("gButton");
         var cNames = getCookiesNames();
         for (var j = 0; j < vButtons.length; j++) {
-            if (cNames.indexOf(vButtons[j].id) > -1) {
+            if (cNames.indexOf(vButtons[j].id) > -1 || vButtons[j].id === "oos") {
                 vButtons[j].disabled = true;
             }
         }

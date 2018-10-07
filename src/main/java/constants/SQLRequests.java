@@ -28,5 +28,4 @@ public class SQLRequests {
     public static final String SELECT_GAMES_BY_DEVS = SELECT_GAMES_ALL +  " WHERE developer_id=?";
     public static final String SELECT_GAMES_BY_PUBS = SELECT_GAMES_ALL +  " WHERE publisher_id=?";
     public static final String SELECT_GAMES_BY_PLATFORMS = SELECT_GAMES_ALL +  " WHERE platform_id=?";
-
 }

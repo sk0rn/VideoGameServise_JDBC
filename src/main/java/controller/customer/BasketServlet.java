@@ -25,8 +25,31 @@ public class BasketServlet extends HttpServlet {
             throws ServletException, IOException {
         req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Basket");
         req.setAttribute("basket", basketService.showAddedGames(req.getCookies()));
-        req.getRequestDispatcher("/customer/basket.jsp").forward(req,resp);
+        req.getRequestDispatcher("/customer/basket.jsp").forward(req, resp);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (basketService.checkout(req.getCookies())) {
+            eraseCookie(req, resp);
+            req.setAttribute("checkout", true);
+        } else {
+            req.setAttribute("checkout", false);
+        }
+        req.getRequestDispatcher("/customer/basket.jsp").forward(req, resp);
 
+    }
+
+    private void eraseCookie(HttpServletRequest req, HttpServletResponse resp) {
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null)
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().indexOf("g_uid") == 0) {
+                    cookie.setValue("");
+                    cookie.setPath("/");
+                    cookie.setMaxAge(0);
+                    resp.addCookie(cookie);
+                }
+            }
+    }
 }

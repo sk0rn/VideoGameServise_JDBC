@@ -8,11 +8,8 @@ import repository.dao.game.impl.GameDaoImpl;
 import service.customer.interfaces.BasketService;
 
 import javax.servlet.http.Cookie;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class BasketServiceImpl implements BasketService {
     private static final Logger LOGGER = Logger.getLogger(GameDaoImpl.class);
@@ -28,6 +25,17 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public List<Game> showAddedGames(Cookie[] cookies) {
+        Integer[] ids = handleCookies(cookies);
+        return (ids.length != 0) ? basketDao.getByGamesByIds(ids) : Collections.emptyList();
+    }
+
+    @Override
+    public boolean checkout(Cookie[] cookies) {
+        Integer[] ids = handleCookies(cookies);
+        return (ids.length != 0) && basketDao.decreaseQuantity(ids);
+    }
+
+    private Integer[] handleCookies(Cookie[] cookies) {
         Integer[] ids = new Integer[cookies.length];
         try {
             for (int i = 0; i < cookies.length; i++) {
@@ -36,14 +44,10 @@ public class BasketServiceImpl implements BasketService {
                 }
             }
         } catch (NumberFormatException nfe) {
-            LOGGER.error("Passed not integer", nfe);
-            return Collections.emptyList();
+            LOGGER.error(nfe);
+            return new Integer[0];
         }
-        return basketDao.getByGamesByIds(ids);
+        return ids;
     }
 
-    @Override
-    public boolean checkout(String[] ids) {
-        return false;
-    }
 }

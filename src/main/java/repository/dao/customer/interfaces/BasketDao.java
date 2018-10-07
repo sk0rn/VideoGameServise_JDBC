@@ -8,7 +8,7 @@ public interface BasketDao {
 
     List<Game> getByGamesByIds(Integer[] ids);
 
-    boolean updateQuantity(Integer[] ids);
+    boolean decreaseQuantity(Integer[] ids);
 
 
 }
