@@ -1,4 +1,4 @@
-package service.customer.interfaces;
+package service.person.customer.interfaces;
 
 import pojo.game.Game;
 
@@ -10,4 +10,5 @@ public interface BasketService {
     List<Game> showAddedGames(Cookie[] cookies);
 
     boolean checkout(Cookie[] cookies);
+
 }

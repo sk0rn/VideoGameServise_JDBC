@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
 
-    LoginService loginService;
+    private LoginService loginService;
 
     @Override
     public void init() throws ServletException {

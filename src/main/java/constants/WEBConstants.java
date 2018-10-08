@@ -23,6 +23,7 @@ public class WEBConstants {
     public static final String ATTRIBUTE_DEVS = "developers";
     public static final String ATTRIBUTE_PUBS = "publishers";
     public static final String ATTRIBUTE_PLATFORMS = "platforms";
+    public static final String ATTRIBUTE_ORDERS = "orders";
 
     public static final String JSP_GAMES = "/game_content/games.jsp";
 

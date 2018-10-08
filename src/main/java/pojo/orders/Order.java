@@ -8,14 +8,13 @@ public class Order {
   private Integer customerId;
   private java.sql.Date dateOrder;
   private java.sql.Date dateReturn;
-  private OrderStatus status;
+  private Integer status;
 
   public Order() {
-
   }
 
-  public Order(Integer id, Integer customerId,
-               Date dateOrder, Date dateReturn, OrderStatus status) {
+  public Order(Integer id, Integer customerId, Date dateOrder,
+               Date dateReturn, Integer status) {
     this.id = id;
     this.customerId = customerId;
     this.dateOrder = dateOrder;
@@ -55,11 +54,11 @@ public class Order {
     this.dateReturn = dateReturn;
   }
 
-  public OrderStatus getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(OrderStatus status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 }

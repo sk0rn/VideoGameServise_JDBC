@@ -33,12 +33,12 @@ public class LoginServiceImpl implements LoginService {
     // метод проверяет есть ли в бд искомый логин с соответствующим пароле
     @Override
     public boolean checkAuth(String login, String password) {
-        Person personr;
+        Person person;
         if (login != null && password != null) {
             try {
-                personr = userDao.getUserByLogin(login);
-                if (personr != null) {
-                    if (personr.getPassword().equals(UtilMD5.md5Custom(password)))
+                person = userDao.getUserByLogin(login);
+                if (person != null) {
+                    if (person.getPassword().equals(UtilMD5.md5Custom(password)))
                         return true;
                 } else {
                     return false;
@@ -47,6 +47,21 @@ public class LoginServiceImpl implements LoginService {
                 LOGGER.error(e);
             }
         }
+        return false;
+    }
+
+    @Override
+    public Person getCustomerByLogin(String login) {
+        try {
+            return userDao.getUserByLogin(login);
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean createCustomer() {
         return false;
     }
 

@@ -1,6 +1,5 @@
 package controller.content;
 
-import constants.WEBConstants;
 import service.games.impl.GenreFeatureImpl;
 import service.games.interfaces.GameFeatureService;
 
@@ -10,8 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static constants.WEBConstants.ATTRIBUTE_GENRES;
-import static constants.WEBConstants.PARAMETER_NAME;
+import static constants.WEBConstants.*;
 
 public class GenreServlet extends HttpServlet {
     private GameFeatureService genreService;
@@ -24,7 +22,7 @@ public class GenreServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Genres");
+        req.setAttribute(ATTRIBUTE_TITLE, "Genres");
         req.setAttribute(ATTRIBUTE_GENRES, genreService.getAllFeatures());
         req.getRequestDispatcher("/game_content/genres.jsp").forward(req,resp);
     }

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenreDaoImpl implements GenreDao {
-
     private static final Logger LOGGER = Logger.getLogger(GenreDaoImpl.class);
     private static ConnectionManager connectionManager =
             ConnectionManagerMobileDB.getInstance();

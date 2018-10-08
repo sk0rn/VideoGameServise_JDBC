@@ -27,6 +27,7 @@
             </td><td width="*">
             <c:if test='${role != null && role == 8}'>
                 <a href="/customer/basket">Корзина</a>
+                <a href="/customer/account">Личный&nbsp;кабинет</a>
             </c:if>
 
             <% if (request.getSession().getAttribute("login") != null) {%>

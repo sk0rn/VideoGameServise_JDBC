@@ -59,7 +59,7 @@
          "'" + game.getTitle().getName() + "'"%>)">add
                 </button>
                 <%} else {%>
-                <button class="gButton" id="oos">out of stock</button>
+                <button class="gButton" id="oos">out&nbsp;of&nbsp;stock</button>
                 <%}%>
             </c:if>
         </td>

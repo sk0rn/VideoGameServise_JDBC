@@ -1,8 +1,13 @@
 package controller.customer;
 
 import constants.WEBConstants;
-import service.customer.impl.BasketServiceImpl;
-import service.customer.interfaces.BasketService;
+import pojo.person.Person;
+import service.person.LoginService;
+import service.person.LoginServiceImpl;
+import service.person.customer.impl.AccountServiceImpl;
+import service.person.customer.impl.BasketServiceImpl;
+import service.person.customer.interfaces.AccountService;
+import service.person.customer.interfaces.BasketService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -10,15 +15,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
+
+import static constants.WEBConstants.*;
 
 public class BasketServlet extends HttpServlet {
-    BasketService basketService;
+    private BasketService basketService;
+    private AccountService accountService;
+    private LoginService loginService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         basketService = new BasketServiceImpl();
+        accountService = new AccountServiceImpl();
+        loginService = new LoginServiceImpl();
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -31,8 +41,13 @@ public class BasketServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (basketService.checkout(req.getCookies())) {
-            eraseCookie(req, resp);
-            req.setAttribute("checkout", true);
+            String login = (String) req.getSession().getAttribute(WEBConstants.LOGIN);
+            Person customer = loginService.getCustomerByLogin(login);
+            if (customer != null) {
+                accountService.createOrder(customer.getId(), req.getCookies());
+                eraseCookie(req, resp);
+                req.setAttribute("checkout", true);
+            }
         } else {
             req.setAttribute("checkout", false);
         }
