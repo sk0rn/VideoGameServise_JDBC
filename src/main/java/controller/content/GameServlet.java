@@ -51,7 +51,7 @@ public class GameServlet extends HttpServlet {
                         break;
                 }
         req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Games");
-        req.setAttribute(WEBConstants.ATTRIBUTE_GAMES, games);
+        req.setAttribute("order_details", games);
         req.getRequestDispatcher(WEBConstants.JSP_GAMES).forward(req, resp);
     }
 }

@@ -2,6 +2,7 @@ package repository.dao.customer.impl;
 
 import org.apache.log4j.Logger;
 import pojo.orders.Order;
+import pojo.orders.OrderDetails;
 import repository.ConnectionManager.ConnectionManager;
 import repository.ConnectionManager.ConnectionManagerMobileDB;
 import repository.dao.customer.interfaces.OrderDao;
@@ -69,7 +70,8 @@ public class OrderDaoImpl implements OrderDao {
         List<Order> orders = null;
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT * FROM orders WHERE customer_id=?")) {
+                     "SELECT * FROM orders WHERE customer_id=?" +
+                             "ORDER BY orders.id DESC")) {
             preparedStatement.setInt(1, customerId);
             try(ResultSet resultSet = preparedStatement.executeQuery()) {
                 orders = new ArrayList<>();
@@ -80,6 +82,33 @@ public class OrderDaoImpl implements OrderDao {
                             resultSet.getDate("date_order"),
                             resultSet.getDate("date_return"),
                             resultSet.getInt("status")));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return orders;
+    }
+
+    @Override
+    public List<OrderDetails> getOrderDetails(Integer orderId) {
+        List<OrderDetails> orders = null;
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT * FROM\n" +
+                             "  order_details od\n" +
+                             "  JOIN games g on od.game_id = g.id\n" +
+                             "  JOIN titles t on g.title_id = t.id\n" +
+                             "WHERE order_id=?")) {
+            preparedStatement.setInt(1, orderId);
+            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+                orders = new ArrayList<>();
+                while (resultSet.next()) {
+                    orders.add(new OrderDetails(
+                            resultSet.getInt("order_id"),
+                            resultSet.getInt("game_id"),
+                            resultSet.getInt("amount"),
+                            resultSet.getString("name")));
                 }
             }
         } catch (SQLException e) {

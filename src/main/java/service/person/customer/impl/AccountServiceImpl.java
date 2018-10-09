@@ -2,6 +2,7 @@ package service.person.customer.impl;
 
 import org.apache.log4j.Logger;
 import pojo.orders.Order;
+import pojo.orders.OrderDetails;
 import repository.dao.customer.impl.OrderDaoImpl;
 import repository.dao.customer.interfaces.OrderDao;
 import service.person.customer.interfaces.AccountService;
@@ -32,5 +33,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Order> getOrdersByCustomerId(Integer customerId) {
         return orderDao.getOrdersByCustomerId(customerId);
+    }
+
+    @Override
+    public List<OrderDetails> getOrderDetails(Integer orderId) {
+        return orderDao.getOrderDetails(orderId);
     }
 }

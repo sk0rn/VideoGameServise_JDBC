@@ -8,7 +8,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <table border="1">
-
     <tr>
         <th>Title</th>
         <th>Genre</th>
@@ -24,26 +23,31 @@
             sum += game.getPrice();
     %>
     <tr>
-        <td><%=games.get(i).getTitle().getName()%></td>
-        <td><%=games.get(i).getGenre().getName()%></td>
-        <td><%=games.get(i).getPlatform().getName()%></td>
-        <td><%=games.get(i).getPrice()%></td>
-        <td>
-            <%--показывам кнопку добавить в корзину--%>
-            <button class="gButton" id="g_uid<%=game.getId()%>" onclick="handleRemoveButton(<%=game.getId()%>)">remove</button>
+        <td><%=games.get(i).getTitle().getName()%>
         </td>
+        <td><%=games.get(i).getGenre().getName()%>
+        </td>
+        <td><%=games.get(i).getPlatform().getName()%>
+        </td>
+        <td><%=games.get(i).getPrice()%>
+        </td>
+        <td>
+            <%--кнопка удалить в корзину--%>
+            <button class="gButton" id="g_uid<%=game.getId()%>" onclick="handleRemoveButton(<%=game.getId()%>)">remove
+            </button>
+        </td>
+        <%if (games.get(i).getQuantity() < 1) {%>
+        <td><button class="gButton" id="oos">out&nbsp;of&nbsp;stock</button></td>
+        <%}%>
     </tr>
     <%
         }
     %>
-    <tr>
-        <td><%="Итого сумма заказа: " + sum + " рублей"%></td>
-    </tr>
     <script>
         // обработка нажатой кнопки remove(удалить из корзины)
         function handleRemoveButton(id) {
             //удаляем куки
-            removeCookie("g_uid"+ id)
+            removeCookie("g_uid" + id)
             // перезагружаем страницу
             location.reload();
         }
@@ -54,7 +58,12 @@
         }
     </script>
 </table>
+<%if (games.size() != 0) {%>
 <form action="/customer/basket" method="post">
+    <tr>
+        <td><%="Итого сумма заказа: " + sum + " рублей"%>
+        </td>
+    </tr>
     <table>
         <tr>
             <br><br>
@@ -65,3 +74,4 @@
         </tr>
     </table>
 </form>
+<%}%>

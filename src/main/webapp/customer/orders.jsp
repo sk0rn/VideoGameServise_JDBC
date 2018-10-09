@@ -25,7 +25,7 @@
             order = orders.get(i);
     %>
     <tr>
-        <td><a href="/customer/account/orders/order?id=<%=orders.get(i).getId()%>&type=orders"><%=orders.get(i).getId()%></a></td>
+        <td><a href="/customer/account/orders/order?order_id=<%=orders.get(i).getId()%>&type=orders"><%=orders.get(i).getId()%></a></td>
         </td>
         <td><%=order.getDateOrder()%>
         </td>
