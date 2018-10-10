@@ -37,6 +37,7 @@
 
             <% if (request.getSession().getAttribute("login") == null) {%>
             <a href="/login">Войти&nbsp;в&nbsp;систему</a>
+            <a href="/register">Зарегистрироваться</a>
             <%}%>
         </td></tr></table>
 

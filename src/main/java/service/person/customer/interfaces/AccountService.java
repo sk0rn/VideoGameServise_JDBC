@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface AccountService {
 
+    boolean createCustomer(String login, String pass);
+
     boolean createOrder(Integer customerId, Cookie[] cookies);
 
     List<Order> getOrdersByCustomerId(Integer customerId);

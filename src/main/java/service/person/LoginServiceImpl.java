@@ -2,8 +2,8 @@ package service.person;
 
 import org.apache.log4j.Logger;
 import pojo.person.Person;
-import repository.dao.person.impl.UserDaoImpl;
-import repository.dao.person.interfaces.UserDao;
+import repository.dao.person.impl.PersonDaoImpl;
+import repository.dao.person.interfaces.PersonDao;
 import utils.UtilMD5;
 
 import java.sql.SQLException;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class LoginServiceImpl implements LoginService {
 
     private static final Logger LOGGER = Logger.getLogger(LoginServiceImpl.class);
-    UserDao userDao = new UserDaoImpl();
+    PersonDao personDao = new PersonDaoImpl();
 
     // метод возвращаем int значение роли юзера(для админа значение == 1)
     @Override
@@ -19,7 +19,7 @@ public class LoginServiceImpl implements LoginService {
         Person person;
         if (login != null) {
             try {
-                person = userDao.getUserByLogin(login);
+                person = personDao.getPersonByLogin(login);
                 if (person == null)
                     return 0;
                 return person.getRole().getId();
@@ -36,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
         Person person;
         if (login != null && password != null) {
             try {
-                person = userDao.getUserByLogin(login);
+                person = personDao.getPersonByLogin(login);
                 if (person != null) {
                     if (person.getPassword().equals(UtilMD5.md5Custom(password)))
                         return true;
@@ -53,7 +53,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Person getCustomerByLogin(String login) {
         try {
-            return userDao.getUserByLogin(login);
+            return personDao.getPersonByLogin(login);
         } catch (SQLException e) {
             LOGGER.error(e);
         }

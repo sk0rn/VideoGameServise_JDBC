@@ -1,7 +1,6 @@
 package utils;
 
 import org.apache.log4j.Logger;
-import repository.dao.game.impl.DeveloperDaoImpl;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

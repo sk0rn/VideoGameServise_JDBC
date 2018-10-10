@@ -22,10 +22,19 @@ public class AccountServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        if (req.getSession().getAttribute(WEBConstants.LOGIN) == null) {
+            req.getRequestDispatcher("/customer/register.jsp").forward(req, resp);
+        }
         req.setAttribute(WEBConstants.ATTRIBUTE_TITLE, "Account");
         req.getRequestDispatcher("/customer/account.jsp").forward(req, resp);
     }
 
-
-
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String name = req.getParameter("login");
+        String pass = req.getParameter("pass");
+        accountService.createCustomer(name, pass);
+        resp.sendRedirect("/login");
+    }
 }
