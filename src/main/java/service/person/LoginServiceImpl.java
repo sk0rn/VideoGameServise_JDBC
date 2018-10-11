@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import pojo.person.Person;
 import repository.dao.person.impl.PersonDaoImpl;
 import repository.dao.person.interfaces.PersonDao;
+import utils.CheckUserData;
 import utils.UtilMD5;
 
 import java.sql.SQLException;
@@ -58,6 +59,12 @@ public class LoginServiceImpl implements LoginService {
             LOGGER.error(e);
         }
         return null;
+    }
+
+    @Override
+    public boolean checkPassword(String password) {
+        return CheckUserData.checkPassword(password,
+                8, 2, 2, 2);
     }
 
 

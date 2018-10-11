@@ -1,8 +1,11 @@
 package controller.customer;
 
 import constants.WEBConstants;
+import service.person.LoginService;
+import service.person.LoginServiceImpl;
 import service.person.customer.impl.AccountServiceImpl;
 import service.person.customer.interfaces.AccountService;
+import utils.CheckUserData;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,11 +16,13 @@ import java.io.IOException;
 public class AccountServlet extends HttpServlet {
 
     AccountService accountService;
+    LoginService loginService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         accountService = new AccountServiceImpl();
+        loginService = new LoginServiceImpl();
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -34,7 +39,11 @@ public class AccountServlet extends HttpServlet {
             throws ServletException, IOException {
         String name = req.getParameter("login");
         String pass = req.getParameter("pass");
-        accountService.createCustomer(name, pass);
-        resp.sendRedirect("/login");
+        if (loginService.checkPassword(pass)) {
+            accountService.createCustomer(name, pass);
+            resp.sendRedirect("/login");
+        } else {
+            resp.sendRedirect("/register?errorCode=badPassword");
+        }
     }
 }

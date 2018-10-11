@@ -10,4 +10,6 @@ public interface LoginService {
 
     Person getCustomerByLogin(String login);
 
+    boolean checkPassword(String password);
+
 }

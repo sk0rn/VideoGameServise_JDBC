@@ -1,15 +1,11 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../header.jsp"%>
-<%
-    switch ("" + request.getParameter("errorCode")) {
-        case "wrongLogin":
-%>
-<p style="color: #FF2222"> Error: wrongLogin.</p>
-<% break;
-    case "accessDenied":%>
-<p style="color: #FF2222"> Error: accessDenied.</p>
-<% break;
-}
-%>
+
+<% if("badPassword".equals(request.getParameter("errorCode"))) {%>
+<p style="color: #FF2222">Пароль должен состоять не менен чем из 8 символов,
+    должен содержать две прописные, две заглавные буквы и две цифры</p>
+<%}%>
+
 <form action="/register" method="post">
     <table>
         <tr>
