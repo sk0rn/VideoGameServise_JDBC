@@ -10,5 +10,4 @@ public interface LoginService {
 
     Person getCustomerByLogin(String login);
 
-    boolean createCustomer();
 }

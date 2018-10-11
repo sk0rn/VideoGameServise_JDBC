@@ -60,9 +60,5 @@ public class LoginServiceImpl implements LoginService {
         return null;
     }
 
-    @Override
-    public boolean createCustomer() {
-        return false;
-    }
 
 }

@@ -1,4 +1,15 @@
 <%@include file="../header.jsp"%>
+<%
+    switch ("" + request.getParameter("errorCode")) {
+        case "wrongLogin":
+%>
+<p style="color: #FF2222"> Error: wrongLogin.</p>
+<% break;
+    case "accessDenied":%>
+<p style="color: #FF2222"> Error: accessDenied.</p>
+<% break;
+}
+%>
 <form action="/register" method="post">
     <table>
         <tr>
